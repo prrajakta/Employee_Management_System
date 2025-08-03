@@ -1,6 +1,7 @@
 package com.example.employee_management.security;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,10 @@ public class JwtUtil {
 
     // Secret key used to sign the JWT (must be 48+ characters for HS256)
     private final String SECRET_KEY = "mysecretkey123456789012345678901234567890";
+
+    // ✅ Use @Value to read from application.properties
+//    @Value("${jwt.secret}")
+//    private String SECRET_KEY;
 
     // Expiry time for token: 24 hours
     private final long EXPIRATION_TIME = 86400000;

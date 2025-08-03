@@ -1,17 +1,22 @@
-# Use official Java runtime base image
+FROM maven:3.8.6-openjdk-17 AS build
+WORKDIR /app
+COPY . .
+RUN mvn clean package
+
+# ✅ Official base image
 FROM openjdk:17-jdk-alpine
 
-# Add metadata
-LABEL maintainer="YourName"
+# ✅ Metadata
+LABEL maintainer="prajaktafulpagar8"
 
-# Build argument: your JAR name
+# ✅ Build arg — must match your final jar name
 ARG JAR_FILE=target/employee-management-0.0.1-SNAPSHOT.jar
 
-# Copy the JAR file from target to container
+# ✅ Copy built jar to container
 COPY ${JAR_FILE} app.jar
 
-# Expose port 8080 (Spring Boot default)
+# ✅ Expose port 8080 for Spring Boot
 EXPOSE 8080
 
-# Command to run the JAR
+# ✅ Run the jar
 ENTRYPOINT ["java", "-jar", "/app.jar"]
